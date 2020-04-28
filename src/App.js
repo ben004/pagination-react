@@ -20,7 +20,7 @@ export default class App extends Component {
     axios.get(`https://jsonplaceholder.typicode.com/posts`).then((res) => {
       const data = res.data;
       this.setState({
-        pageCount: Math.ceil(data.length / this.state.perPage),
+        
         data: data,
       });
     });
@@ -44,7 +44,7 @@ export default class App extends Component {
     this.setState(
       {
         currentPage: selectedPage,
-        offset: offset,
+        offset: offset
       },
       () => {
         this.receivedData();
@@ -71,7 +71,7 @@ export default class App extends Component {
           nextLabel={"next"}
           breakLabel={"..."}
           breakClassName={"break-me"}
-          pageCount={this.state.pageCount}
+          pageCount={Math.ceil(this.state.data.length / this.state.perPage)}
           itemsCountPerPage={this.state.perPage}
           marginPagesDisplayed={5}
           pageRangeDisplayed={2}
