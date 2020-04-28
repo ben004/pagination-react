@@ -20,8 +20,8 @@ export default class App extends Component {
         this.state.offset,
         this.state.offset + this.state.perPage
       );
-      const postData = slice.map((pd) => (
-          <p>{pd.title}</p>
+      const postData = slice.map((pd,id) => (
+         <p> <b>{id} {pd.title}</b></p>
       ));
 
       this.setState({
@@ -33,6 +33,7 @@ export default class App extends Component {
   handlePageClick = (e) => {
     const selectedPage = e.selected;
     const offset = selectedPage * this.state.perPage;
+    //console.log(this.state.perPage)
     this.setState(
       {
         currentPage: selectedPage,
@@ -51,7 +52,7 @@ export default class App extends Component {
     this.setState({
       perPage: e.target.value,
     },()=>{
-        console.log(this.state.perPage)//check value updateed or not
+        //console.log(this.state.perPage)//check value updateed or not
     });
   }
   render() {
@@ -70,8 +71,8 @@ export default class App extends Component {
           breakClassName={"break-me"}
           pageCount={this.state.pageCount}
           itemsCountPerPage={this.state.perPage}
-          marginPagesDisplayed={10}
-          pageRangeDisplayed={1}
+          marginPagesDisplayed={5}
+          pageRangeDisplayed={2}
           onPageChange={(e) => this.handlePageClick(e)}
           containerClassName={"pagination"}
           subContainerClassName={"pages pagination"}
