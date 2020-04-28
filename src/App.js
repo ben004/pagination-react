@@ -28,12 +28,12 @@ export default class App extends Component {
   postData() {
     const slice = this.state.data.slice(
       this.state.offset,
-      this.state.offset + parseInt(this.state.perPage)
+      this.state.offset + this.state.perPage
     );
     return (
       <ol>
-        {slice.map((pd, id) => {
-          return <li key={id}>{pd.title}</li>;
+        {slice.map((pd, index) => {
+          return <li key={index}>{pd.title}</li>;
         })}
       </ol>
     );
@@ -53,17 +53,18 @@ export default class App extends Component {
   };
 
   handlechange(e) {
+    let array = [10,20,25]
     this.setState({
-      perPage: e.target.value,
+      perPage: array[e.target.value],
     });
   }
   render() {
     return (
       <div>
         <select onClick={(e) => this.handlechange(e)}>
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={25}>25</option>
+          <option value={0}>10</option>
+          <option value={1}>20</option>
+          <option value={2}>25</option>
         </select>
         {this.postData()}
         <ReactPaginate
