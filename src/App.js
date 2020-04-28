@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import "./App.css";
-
+const array = [10,20,25];
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +21,7 @@ export default class App extends Component {
       const data = res.data;
       this.setState({
         pageCount: Math.ceil(data.length / this.state.perPage),
-        data: data
+        data: data,
       });
     });
   }
@@ -31,11 +31,11 @@ export default class App extends Component {
       this.state.offset + this.state.perPage
     );
     return (
-      <ol>
+      <ul>
         {slice.map((pd, index) => {
-          return <li key={index}>{pd.title}</li>;
+          return <li key={index}> {pd.title}</li>;
         })}
-      </ol>
+      </ul>
     );
   }
   handlePageClick = (e) => {
@@ -53,18 +53,17 @@ export default class App extends Component {
   };
 
   handlechange(e) {
-    let array = [10,20,25]
     this.setState({
-      perPage: array[e.target.value],
+      perPage: parseInt(e.target.value),
     });
   }
   render() {
     return (
       <div>
         <select onClick={(e) => this.handlechange(e)}>
-          <option value={0}>10</option>
-          <option value={1}>20</option>
-          <option value={2}>25</option>
+          {array.map((value) => (
+          <option value={value}>{value}</option>
+          ))}
         </select>
         {this.postData()}
         <ReactPaginate
